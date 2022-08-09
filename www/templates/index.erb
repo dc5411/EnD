@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EnD v0.1</title>
+  <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" href="vendor/nouislider/nouislider.min.css">
+  <!-- Main css -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js"
+    integrity="sha512-8pHNiqTlsrRjVD4A/3va++W1sMbUHwWxxRPWNyVlql3T+Hgfd81Qc6FC5WMXDC+tSauxxzp1tgiAvSKFu1qIlA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+  <div class="main">
+
+    <div class="container">
+      <div class="signup-content">
+        <div class="signup-img">
+          <div class="signup-img-content">
+            <h2>Exploits & Dragons</h2>
+            <p>By DC 5411</p>
+          </div>
+        </div>
+        <div class="signup-form">
+          <form method="POST" action="/spawn" class="register-form" id="register-form">
+            <h3>Basic information</h2>
+              <hr><BR>
+              <div class="form-row">
+                <div class="form-group">
+                  <div class="form-input">
+                    <div class="label-flex">
+                      <label for="boss_name" class="required"><i class="fa-solid fa-ghost"></i>&nbsp;&nbsp;Boss
+                        Name</label>
+                      <a href="/catalog" class="form-link">Download existing Boss</a>
+                    </div>
+                    <input type="text" name="boss_name" id="boss_name" />
+                  </div>
+                  <div class="form-input">
+                    <label for="intro_text" class="required"><i class="fa-solid fa-list"></i>&nbsp;&nbsp;Introduction
+                      text (HTML Header)</label>
+                    <input type="text" name="intro_text" id="intro_text" placeholder="Who dares to challenge me?" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-input">
+                    <div class="form-select">
+                      <div class="label-flex">
+                        <label for="ascii_selector" class="required"><i
+                            class="fa-solid fa-palette"></i>&nbsp;&nbsp;ASCII Art</label>
+                        <a href="https://www.asciiart.eu/" class="form-link">Get more ASCII art!</a>
+                      </div>
+                      <div class="select-list  form-select-lg mb-3">
+                        <select name="ascii_selector" id="ascii_selector">
+                        <option value="None">...</option>
+                        <% $ascii_files.each do |ascii| %>
+                          <option value="<%= ascii %>"><%= ascii %></option>
+                        <% end %>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-input">
+                    <label for="taunt_text" class="required"><i class="fa-solid fa-list"></i>&nbsp;&nbsp;Taunt text
+                      (HTML
+                      footer)</label>
+                    <input type="text" name="taunt_text" id="taunt_text" placeholder="I'm waiting at port 5800 (SSH)..." />
+                  </div>
+                </div>
+              </div>
+              <h3>Communication</h2>
+                <hr><BR>
+                <div class="form-row">
+                  <div class="form-group">
+                    <div class="form-radio">
+                      <div class="label-flex">
+                        <label for="channel" class="required"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;Contact
+                          channel</label>
+                      </div>
+                      <div class="form-radio-group">
+                        <div class="form-radio-item">
+                          <input type="radio" name="channel" id="discord" value="discord" checked>
+                          <label for="discord">Discord</label>
+                          <span class="check"></span>
+                        </div>
+                        <div class="form-radio-item">
+                          <input type="radio" name="channel" id="slack" value="slack" disabled>
+                          <label for="slack">Slack</label>
+                          <span class="check"></span>
+                        </div>
+                        <div class="form-radio-item">
+                          <input type="radio" name="channel" id="telegram" value="telegram" disabled>
+                          <label for="telegram">Telegram</label>
+                          <span class="check"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-input">
+                      <label for="presentation" class="required"><i
+                          class="fa-solid fa-dungeon"></i>&nbsp;&nbsp;Presentation Message (Briefing)</label>
+                      <input type="text" name="presentation" id="presentation"
+                        placeholder="Destroy my 3 shield to claim victory, mortal..." />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-input">
+                      <label for="api_key" class="required"><i class="fa-solid fa-key"></i>&nbsp;&nbsp;Contact Channel
+                        API Key</label>
+                      <input type="text" name="api_key" id="api_key" />
+                    </div>
+                    <div class="form-input">
+                      <label for="death_message" class="required"><i
+                          class="fa-solid fa-book-skull"></i>&nbsp;&nbsp;Death
+                        Message (Outro)</label>
+                      <input type="text" name="death_message" id="death_message"
+                        placeholder="[Flag dropped somewhere in the server]" />
+                    </div>
+                  </div>
+                </div>
+                <h3>Players</h2>
+                  <hr><BR>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <div class="form-input">
+                        <label for="unix_users" class="required"><i class="fa-solid fa-users"></i>&nbsp;&nbsp;Unix Users
+                          (Comma separated)</label>
+                        <input type="text" name="unix_users" id="unix_users" placeholder="player1, player2, player3" />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-input">
+                        <label for="ssh_pass" class="required"><i class="fa-solid fa-user-lock"></i>&nbsp;&nbsp;Default
+                          SSH Password</label>
+                        <input type="text" name="ssh_pass" id="ssh_pass" placeholder="dc5411" />
+                      </div>
+                    </div>
+                  </div>
+                  <h3>Boss Stats & Dice</h2>
+                    <hr><BR>
+                    <div class="form-row">
+                      <div class="form-group">
+                        <div class="form-input">
+                          <label for="flag_loc" class="required"><i
+                              class="fa-solid fa-flag-checkered"></i>&nbsp;&nbsp;Flag location (Full path)</label>
+                          <input type="text" name="flag_loc" id="flag_loc" placeholder="/var/log/flag.dmp" />
+                        </div>
+                        <div class="form-select">
+                          <div class="select-list">
+                            <label for="dmgcnd1" class="required"><i
+                                class="fa-solid fa-suitcase-medical"></i>&nbsp;&nbsp;Damage
+                              Condition #1</label>
+                            <select name="dmgcnd1" id="dmgcnd1">
+                              <option value="Delete">...</option>
+                              <option value="Delete">Delete a File</option>
+                              <option value="Interrupt">Interrupt a Connection</option>
+                              <option value="Stop">Stop a Service</option>
+                              <option value="Lock">Lock User</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-input">
+                          <label for="argument_1" class="required"><i
+                              class="fa-solid fa-location-crosshairs"></i>&nbsp;&nbsp;Condition #1 Arguments</label>
+                          <input type="text" name="argument_1" id="argument_1"
+                            placeholder="[File, User, Service, etc]" />
+                        </div>
+                        <div class="form-select">
+                          <div class="select-list">
+                            <label for="dmgcnd3" class="required"><i
+                                class="fa-solid fa-suitcase-medical"></i>&nbsp;&nbsp;Damage
+                              Condition #3</label>
+                            <select name="dmgcnd3" id="dmgcnd3">
+                              <option value="Delete">...</option>
+                              <option value="Delete">Delete a File</option>
+                              <option value="Interrupt">Interrupt a Connection</option>
+                              <option value="Stop">Stop a Service</option>
+                              <option value="Lock">Lock User</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-radio">
+                          <div class="label-flex">
+                            <label for="sattack" class="required"><i
+                                class="fa-solid fa-fire-flame-curved"></i>&nbsp;&nbsp;Single Attack
+                              Chance</label>
+                          </div>
+                          <div class="form-radio-group">
+                            <div class="form-radio-item">
+                              <input type="radio" name="sattack" id="a0" value="0" checked>
+                              <label for="a0">0 %</label>
+                              <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                              <input type="radio" name="sattack" id="a10" value="1">
+                              <label for="a10">10 %</label>
+                              <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                              <input type="radio" name="sattack" id="a20" value="2">
+                              <label for="a20">20 %</label>
+                              <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                              <input type="radio" name="sattack" id="a30" value="3">
+                              <label for="a30">30 %</label>
+                              <span class="check"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-radio">
+                          <div class="label-flex">
+                            <label for="clue" class="required"><i class="fa-solid fa-puzzle-piece"></i>&nbsp;&nbsp;Talk
+                              / Hint
+                              Chance</label>
+                          </div>
+                          <div class="form-radio-group">
+                            <div class="form-radio-item">
+                              <input type="radio" name="clue" id="c0" value="0" checked>
+                              <label for="c0">0 %</label>
+                              <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                              <input type="radio" name="clue" id="c10" value="1">
+                              <label for="c10">10 %</label>
+                              <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                              <input type="radio" name="clue" id="c20" value="2">
+                              <label for="c20">20 %</label>
+                              <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                              <input type="radio" name="clue" id="c30" value="3">
+                              <label for="c30">30 %</label>
+                              <span class="check"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-input">
+                          <label for="dialog_2" class="required"><i
+                              class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;Dialogue Line #2</label>
+                          <input type="text" name="dialog_2" id="dialog_2"
+                            placeholder="[Clue on how to beat the Boss...]" />
+                        </div>
+                        <div class="form-input">
+                          <label for="argument_3" class="required"><i class="fa-solid fa-hourglass-start"></i>&nbsp;&nbsp;Time before first attack (Seconds)</label>
+                          <input type="text" name="wtime" id="wtime" placeholder="30" />
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="form-input">
+                          <label for="flag_con" class="required"><i class="fa-solid fa-floppy-disk"></i>&nbsp;&nbsp;Flag
+                            contents</label>
+                          <input type="text" name="flag_con" id="flag_con" placeholder="DC5411{my_flag}" />
+                        </div>
+                        <div class="form-select">
+                          <div class="select-list">
+                            <label for="dmgcnd2" class="required"><i
+                                class="fa-solid fa-suitcase-medical"></i>&nbsp;&nbsp;Damage
+                              Condition #2</label>
+                            <select name="dmgcnd2" id="dmgcnd2">
+                              <option value="Delete">...</option>
+                              <option value="Delete">Delete a File</option>
+                              <option value="Interrupt">Interrupt a Connection</option>
+                              <option value="Stop">Stop a Service</option>
+                              <option value="Lock">Lock User</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-input">
+                          <label for="argument_2" class="required"><i
+                              class="fa-solid fa-location-crosshairs"></i>&nbsp;&nbsp;Condition #2 Arguments</label>
+                          <input type="text" name="argument_2" id="argument_2"
+                            placeholder="[File, User, Service, etc]" />
+                        </div>
+                        <div class="form-input">
+                          <label for="argument_3" class="required"><i
+                              class="fa-solid fa-location-crosshairs"></i>&nbsp;&nbsp;Condition #3 Arguments</label>
+                          <input type="text" name="argument_3" id="argument_3"
+                            placeholder="[File, User, Service, etc]" />
+                        </div>
+                        <div class="form-radio">
+                          <div class="label-flex">
+                            <label for="aattack" class="required"><i class="fa-solid fa-volcano"></i>&nbsp;&nbsp;Area
+                              Attack
+                              Chance</label>
+                          </div>
+                          <div class="form-radio-group">
+                            <div class="form-radio-item">
+                              <input type="radio" name="aattack" id="s0" value="0" checked>
+                              <label for="s0">0 %</label>
+                              <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                              <input type="radio" name="aattack" id="s10" value="1">
+                              <label for="s10">10 %</label>
+                              <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                              <input type="radio" name="aattack" id="s20" value="2">
+                              <label for="s20">20 %</label>
+                              <span class="check"></span>
+                            </div>
+                            <div class="form-radio-item">
+                              <input type="radio" name="aattack" id="s30" value="3">
+                              <label for="s30">30 %</label>
+                              <span class="check"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-input">
+                          <label for="dialog_1" class="required"><i
+                              class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;Dialogue Line #1</label>
+                          <input type="text" name="dialog_1" id="dialog_1"
+                            placeholder="[Clue on how to beat the Boss...]" />
+                        </div>
+                        <div class="form-input">
+                          <label for="dialog_3" class="required"><i
+                              class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;Dialogue Line #3</label>
+                          <input type="text" name="dialog_3" id="dialog_3"
+                            placeholder="[Clue on how to beat the Boss...]" />
+                        </div>
+                        <div class="form-input">
+                          <label for="argument_3" class="required"><i class="fa-solid fa-stopwatch"></i>&nbsp;&nbsp;Attack Rate (Seconds)</label>
+                          <input type="text" name="rtime" id="rtime" placeholder="30" />
+                        </div>
+                      </div>
+                    </div>
+                    <h3>Additional Settings</h2>
+                      <hr><BR>
+                      <div class="form-row">
+                        <div class="form-group">
+                          <div class="form-input">
+                            <label for="sudo" class="required"><i class="fa-solid fa-lock-open"></i>&nbsp;&nbsp;Sudo
+                              allowed binaries (comma
+                              separated)</label>
+                            <input type="text" name="sudo" id="sudo" placeholder="/usr/sbin/usermod" />
+                          </div>
+                          <div class="form-input">
+                            <label for="cmd" class="required"><i class="fa-solid fa-keyboard"></i>&nbsp;&nbsp;Additional
+                              commands (Comma
+                              separated)</label>
+                            <input type="text" name="cmd" id="cmd" placeholder="echo '127.0.0.1 local' >> /etc/hosts" />
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-input">
+                            <label for="files" class="required"><i
+                                class="fa-solid fa-file-arrow-down"></i>&nbsp;&nbsp;Additional files to copy (Comma
+                              separated)</label>
+                            <input type="text" name="files" id="files" placeholder="test.txt ./, clue.txt /tmp/clue.txt" />
+                          </div>
+                          <div class="form-input">
+                            <label for="pkgs" class="required"><i class="fa-solid fa-cubes"></i>&nbsp;&nbsp;Additional
+                              packages (Comma separated)</label>
+                            <input type="text" name="pkgs" id="pkgs" placeholder="nano, vim" />
+                          </div>
+                        </div>
+                      </div>
+                      <BR>
+                        <input type="hidden" name="ascii_sel" id="ascii_sel" value="">
+                        <input type="hidden" name="dmgcnd1_sel" id="dmgcnd1_sel" value="">
+                        <input type="hidden" name="dmgcnd2_sel" id="dmgcnd2_sel" value="">
+                        <input type="hidden" name="dmgcnd3_sel" id="dmgcnd3_sel" value="">
+                      <BR>
+                      <div class="form-submit">
+                        <input type="submit" value="Spawn Boss" class="submit" id="submit" name="submit" />
+                      </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JS -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/nouislider/nouislider.min.js"></script>
+  <script src="vendor/wnumb/wNumb.js"></script>
+  <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+  <script src="vendor/jquery-validation/dist/additional-methods.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+<!-- 
+  Credits: This templates was made by Colorlib (https://colorlib.com). Modified by AdanZkX and MauroEldritch from DC5411. 
+  Icons by Icongeek26: https://www.flaticon.com/free-icons/fantasy.
+-->
+
+</html>
