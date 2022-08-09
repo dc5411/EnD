@@ -19,6 +19,8 @@ gem install rubyzip sinatra
 
 Two sample bosses (BlizardOne and Saruman) can be found on the Catalog. They are pretty easy to defeat and may be a good starting point for new players. Login into them as either `player1` or `player2` with password `dc5411`.
 
+Before launching a Boss, you need to set your own Discord API Key / Webhook ID (other channels coming soon). Just visit https://support.discord.com/hc/es/articles/228383668-Introducci%C3%B3n-a-los-webhook to create a webhook and replace the `$api_key` value in the `boss.rb` file (line 7).
+
 Feel free to ask for guidance if you are stuck!
 
 
